@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Counter</title>
+    <style>
+        body{
+            background-image: url("https://img.freepik.com/premium-photo/luxury-black-leather-texture-background_36078-962.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #counterWhole{
+            background-image: linear-gradient(to bottom, rgba(76,76,76,1) 0%,rgba(89,89,89,1) 12%,rgba(102,102,102,1) 25%,rgba(71,71,71,1) 39%,rgba(44,44,44,1) 50%,rgba(0,0,0,1) 51%,rgba(17,17,17,1) 60%,rgba(43,43,43,1) 76%,rgba(28,28,28,1) 91%,rgba(19,19,19,1) 100%);
+            width: max-content;
+            margin: 0 auto;
+            padding: 20px;
+            border: 2px solid black;
+        }
+        #counterBody{
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+        }
+        .counterSlot{
+            border: 3px solid black;
+            width: 60px;
+            height: 100px;
+            font-size: 60px;
+            font-family: fantasy;
+            line-height: 100px;
+            overflow: hidden;
+            box-shadow: 0 0 8px black inset;
+            user-select: none;
+            background-color: whitesmoke;
+        }
+        #counterBtns{
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 20px;
+        }
+        #counterBtns > button{
+            background-image: radial-gradient(ellipse at center, rgba(226,226,226,1) 0%,rgba(219,219,219,1) 50%,rgba(209,209,209,1) 51%,rgba(254,254,254,1) 100%);
+            border-radius: 50%;
+            border: none;
+            outline: none;
+            color: black;
+            font-family: math;
+            display: block;
+            user-select: none;
+        }
+        #countBtn{
+            width: 100px;
+            height: 100px;
+            font-size: 20px;
+        }
+        #resetBtn{
+            width: 50px;
+            height: 50px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+<div id="counterWhole">
+    <div id="counterBody">
+        <div class="counterSlot">
+            <div class="counterNumber" id="counterHuns">
+                0
+                1
+                2
+                3
+                4
+                5
+                6
+                7
+                8
+                9
+                0
+            </div>
+        </div>
+        <div class="counterSlot">
+            <div class="counterNumber" id="counterTens">
+                0
+                1
+                2
+                3
+                4
+                5
+                6
+                7
+                8
+                9
+                0
+            </div>
+        </div>
+        <div class="counterSlot">
+            <div class="counterNumber" id="counterOnes">
+                0
+                1
+                2
+                3
+                4
+                5
+                6
+                7
+                8
+                9
+                0
+            </div>
+        </div>
+    </div>
+    <div id="counterBtns">
+        <button id="countBtn" onclick="count()">Count</button>
+        <button id="resetBtn" onclick="reset()">Reset</button>
+    </div>
+</div>
+</body>
+<script>
+    let number = 0;
+    let counterone = document.querySelector("#counterOnes")
+    let counterten = document.querySelector("#counterTens")
+    let counterhun = document.querySelector("#counterHuns")
+    let countBtn = document.querySelector("#countBtn")
+    counterone.style.transition = "margin 0.2s ease 0s"
+    counterten.style.transition = "margin 0.2s ease 0s"
+    counterhun.style.transition = "margin 0.2s ease 0s"
+    counterone.style.marginTop = 0
+    counterten.style.marginTop = 0
+    counterhun.style.marginTop = 0
+    const count = ()=>{
+        let prevnumone = parseInt(number.toString().slice(-1))
+        let prevnumten = parseInt(number.toString().slice(-2,-1)) | 0
+        let prevnumhun = parseInt(number.toString().slice(-3,-2)) | 0
+        number++
+        if(prevnumone<9){
+            counterone.style.transition = "margin 0.2s ease 0s"
+            counterone.style.marginTop = `${parseInt(counterone.style.marginTop) - 100}px`
+        }else{
+            counterone.style.marginTop = `${parseInt(counterone.style.marginTop) - 100}px`
+            countBtn.disabled = true
+            setTimeout(()=>{
+                countBtn.disabled = false
+                counterone.style.marginTop = 0
+                counterone.style.transition = ""
+            },200)
+            if(prevnumten<9){
+                counterten.style.transition = "margin 0.2s ease 0s"
+                counterten.style.marginTop = `${parseInt(counterten.style.marginTop) - 100}px`
+            }else{
+                counterten.style.marginTop = `${parseInt(counterten.style.marginTop) - 100}px`
+                setTimeout(()=>{
+                    counterten.style.marginTop = 0
+                    counterten.style.transition = ""
+                },200)
+                if(prevnumhun<9){
+                    counterhun.style.transition = "margin 0.2s ease 0s"
+                    counterhun.style.marginTop = `${parseInt(counterhun.style.marginTop) - 100}px`
+                }else{
+                    counterhun.style.marginTop = `${parseInt(counterhun.style.marginTop) - 100}px`
+                    setTimeout(()=>{
+                        counterhun.style.marginTop = 0
+                        counterhun.style.transition = ""
+                    },200)
+                }
+            }
+        }
+    }
+    const reset = ()=>{
+        number = 0
+        counterone.style.transition = "margin 0.2s ease 0s"
+        counterone.style.marginTop = 0
+        counterten.style.transition = "margin 0.2s ease 0s"
+        counterten.style.marginTop = 0
+        counterhun.style.transition = "margin 0.2s ease 0s"
+        counterhun.style.marginTop = 0
+    }
+</script>
+</html>
